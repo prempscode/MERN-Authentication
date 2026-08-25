@@ -4,13 +4,29 @@ const Content = () => {
   const { user } = useAuth()
 
   return (
-    <div>
-      <h1>Protected Content</h1>
+    <main className='page'>
+      <div className='content-page'>
+        <p className='content-label'>PROTECTED CONTENT</p>
 
-      <p>Welcome, {user?.username}</p>
+        <h1>
+          Welcome, <span>{user?.username}</span>
+        </h1>
 
-      <p>This page can only be accessed by authenticated users.</p>
-    </div>
+        <p>You are viewing this page because you are authenticated.</p>
+
+        <div className='auth-status'>
+          <p>
+            Authentication status:
+            <span> Authorized</span>
+          </p>
+
+          <p>
+            Account:
+            <span> {user?.email}</span>
+          </p>
+        </div>
+      </div>
+    </main>
   )
 }
 

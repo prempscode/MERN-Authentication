@@ -293,10 +293,14 @@ input {
 
 .home-actions {
   display: flex;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
   gap: 15px;
+  align-items: center;
   margin-top: 30px;
+}
+.home-actions p {
+  margin: 0;
 }
 
 .primary-btn,
@@ -365,4 +369,64 @@ input {
 
 .contact-info span {
   color: var(--white);
+}
+
+.content-page {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+}
+
+.content-label {
+  color: var(--crimson);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.content-page h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+
+.content-page h1 span {
+  color: var(--crimson);
+}
+
+.content-page > p {
+  color: var(--gray);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+.auth-status {
+  margin: 35px auto 0;
+  padding: 25px;
+  max-width: 500px;
+  border: 1px solid #292929;
+  border-radius: 10px;
+  background: #111;
+  text-align: left;
+}
+
+.auth-status p {
+  color: var(--gray);
+  margin-bottom: 15px;
+}
+
+.auth-status p:last-child {
+  margin-bottom: 0;
+}
+
+.auth-status span {
+  color: white;
+}
+nav a {
+  color: var(--white);
+}
+
+nav a.active {
+  color: var(--crimson);
+  text-decoration: underline dotted;
 }
