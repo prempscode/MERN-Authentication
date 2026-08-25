@@ -8,7 +8,7 @@ const register = async (req, res) => {
 
     if (!username || !email || !password) {
       return res.status(400).json({
-        message: 'All filled required'
+        message: 'All fields required to filled'
       })
     }
 
@@ -36,7 +36,7 @@ const register = async (req, res) => {
     res.cookie('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
       maxAge: 7 * 24 * 60 * 60 * 1000
     })
 
@@ -48,4 +48,38 @@ const register = async (req, res) => {
   }
 }
 
-export { register }
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body
+
+    if (!email || !password) {
+      return res.status(400).json({
+        message: 'All fields required to filled'
+      })
+    }
+
+    const user = await userModel.findOne({ email })
+
+    if (!user) {
+      return res.status(400).json({
+        message: 'Email not registerd'
+      })
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(password, user.password)
+
+    if (!isPasswordCorrect) {
+      return res.status(401).json({
+        message: 'Invalid credentials'
+      })
+    }
+
+    res.status(200).json({
+      message: 'Login successful'
+    })
+  } catch (error) {
+    console.log('Error occured at login auth controller : ', error.message)
+  }
+}
+
+export { register, login }
