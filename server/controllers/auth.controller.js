@@ -41,7 +41,11 @@ const register = async (req, res) => {
     })
 
     return res.status(201).json({
-      message: ' User registrated successfully'
+      message: ' User registrated successfully',
+      user: {
+        username: user.username,
+        email: user.email
+      }
     })
   } catch (err) {
     console.log('Register Controller error : ', err.message)
@@ -89,7 +93,11 @@ const login = async (req, res) => {
     })
 
     return res.status(200).json({
-      message: 'Login successful'
+      message: 'Login successful',
+      user: {
+        username: user.username,
+        email: user.email
+      }
     })
   } catch (error) {
     console.log('Error occured at login auth controller : ', error.message)

@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   }, [])
 
   // REGISTER
-  const register = async userData => {
+  const register = async (userData) => {
     const response = await api.post('/auth/register', userData)
 
     setUser(response.data.user)
@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   // LOGIN
-  const login = async userData => {
+  const login = async (userData) => {
     const response = await api.post('/auth/login', userData)
 
     setUser(response.data.user)
