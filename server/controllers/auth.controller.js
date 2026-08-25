@@ -127,4 +127,29 @@ const logout = async (req, res) => {
   }
 }
 
-export { register, login, logout }
+const getCurrentUser = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.userId).select('-password')
+
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found'
+      })
+    }
+
+    return res.status(200).json({
+      user: {
+        username: user.username,
+        email: user.email
+      }
+    })
+  } catch (error) {
+    console.log('Get current user error:', error.message)
+
+    return res.status(500).json({
+      message: 'Internal server error'
+    })
+  }
+}
+
+export { register, login, logout, getCurrentUser }
