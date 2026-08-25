@@ -45,6 +45,9 @@ const register = async (req, res) => {
     })
   } catch (err) {
     console.log('Register Controller error : ', err.message)
+    return res.status(500).json({
+      message: 'Internal server error'
+    })
   }
 }
 
@@ -62,7 +65,7 @@ const login = async (req, res) => {
 
     if (!user) {
       return res.status(400).json({
-        message: 'Email not registerd'
+        message: 'Invalid credentials'
       })
     }
 
@@ -74,11 +77,25 @@ const login = async (req, res) => {
       })
     }
 
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET_TOKEN, {
+      expiresIn: '7d'
+    })
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000
+    })
+
     res.status(200).json({
       message: 'Login successful'
     })
   } catch (error) {
     console.log('Error occured at login auth controller : ', error.message)
+    return res.status(500).json({
+      message: 'Internal server error'
+    })
   }
 }
 
