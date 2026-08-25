@@ -13,7 +13,7 @@ The project focuses only on the core authentication flow:
 - React Context API for authentication state
 - HTTP-only cookie for storing the JWT
 
-## Screenshot
+## Sneak Peek
 
 ![MERN Authentication website screenshot](./image.png)
 
