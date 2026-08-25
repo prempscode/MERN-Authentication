@@ -7,10 +7,13 @@ import Register from './pages/Register'
 import Login from './pages/Login'
 import Content from './pages/Content'
 import ProtectedRoute from './components/ProtectedRoute'
+import Navbar from './components/Navbar'
+import './index.css'
 
 const App = () => {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
