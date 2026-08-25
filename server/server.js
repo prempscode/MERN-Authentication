@@ -4,8 +4,8 @@ import cookieParser from 'cookie-parser'
 import connectDB from './config/db.js'
 import { config } from 'dotenv'
 import dns from 'dns'
-import healthCheck from './routes/health.route.js';
-
+import healthCheck from './routes/health.route.js'
+import authRouter from './routes/auth.route.js'
 
 dns.setServers(['1.1.1.1', '8.8.8.8'])
 
@@ -16,8 +16,8 @@ connectDB()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({ credentials: true }))
-app.use('/api' , healthCheck);
-app.use('/api/auth', )
+app.use('/api', healthCheck)
+app.use('/api/auth', authRouter)
 
 const PORT = process.env.PORT
 
